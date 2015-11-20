@@ -6,13 +6,14 @@ $url=array(
 $flug=false;
 $cnttitle='';
 $status=0;
+//index.phpに初回アクセスした時と検索キーワード入力してPOST送信した時にいろいろ変える仕組み
 if(isset($_POST['words']) && $_POST['words']!=''){
 	$words=h($_POST['words']);
-	$flug=true;
+	$flug=true;//これで状態を判定しています
 	$rss=simplexml_load_file($url[1]);
 	$cnttitle='社会ニュース検索結果';
 }else{
-	$flug=false;
+	$flug=false;//これで状態を判定しています
 	$rss=simplexml_load_file($url[0]);
 	$cnttitle='最新のニュースから10件';
 }
@@ -45,7 +46,7 @@ function h($v){
 	<div class="newswrapp">
 	<h2 id="sectitle1" class="sectitle"><?php echo $cnttitle;?></h2>
 	<?php foreach($rss->channel->item as $item):
-
+		//検索結果表示
 		if($flug==true){
 			
 			$result=mb_strpos($item->title, $words,0,'UTF-8');
@@ -64,6 +65,7 @@ function h($v){
 			
 
 		}
+		//初回アクセス時の表示
 		if($flug==false){
 			echo "<div class='news'>";
 			echo	"<a href='".$item->link."' target='blank'><h3>".$item->title."</h3></a>";
