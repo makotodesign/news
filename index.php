@@ -51,9 +51,11 @@ function h($v){
 			
 			$result=mb_strpos($item->title, $words,0,'UTF-8');
 			if($result!==false){
+				$unixtime=strtotime($item->pubDate);//投稿時間がFri, 20 Nov 2015 11:01:51 GMTという形だったのでunixtimeに変換
 				echo "<div class='news'>";
 				echo	"<a href='".$item->link."' target='blank'><h3>".$item->title."</h3></a>";
-				echo    "<p class='date'>$item->pubDate</p>";
+				echo    "<p class='date'>".date('Y年m月d日 H時i分',$unixtime)."</p>";//date()で馴染みのある形に成形
+
 				echo	"<div class='details'>
 							$item->description
 						</div>";
@@ -66,9 +68,10 @@ function h($v){
 		}
 		//初回アクセス時の表示
 		if($flug==false){
+			$unixtime=strtotime($item->pubDate);//投稿時間がFri, 20 Nov 2015 11:01:51 GMTという形だったのでunixtimeに変換
 			echo "<div class='news'>";
 			echo	"<a href='".$item->link."' target='blank'><h3>".$item->title."</h3></a>";
-			echo    "<p class='date'>$item->pubDate</p>";
+			echo    "<p class='date'>".date('Y年m月d日 H時i分',$unixtime)."</p>";//date()で馴染みのある形に成形
 			echo	"<div class='details'>
 					$item->description
 				</div>";
