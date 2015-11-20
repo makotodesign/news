@@ -7,12 +7,12 @@ $flug=false;
 $cnttitle='';
 $status=0;
 //index.phpに初回アクセスした時と検索キーワード入力してPOST送信した時にいろいろ変える仕組み
-if(isset($_POST['words']) && $_POST['words']!=''){
+if(isset($_POST['words']) && $_POST['words']!=''){//$_POST['words']がセットされてかつ中身が空白ではない時
 	$words=h($_POST['words']);
 	$flug=true;//これで状態を判定しています
 	$rss=simplexml_load_file($url[1]);
 	$cnttitle='社会ニュース検索結果';
-}else{
+}else{//$_POST['words']がセットされていない時→index.phpの初回読み込み時
 	$flug=false;//これで状態を判定しています
 	$rss=simplexml_load_file($url[0]);
 	$cnttitle='最新のニュースから10件';
