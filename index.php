@@ -51,7 +51,6 @@ function h($v){
 			
 			$result=mb_strpos($item->title, $words,0,'UTF-8');
 			if($result!==false){
-				$cnttitle='わーーーー';
 				echo "<div class='news'>";
 				echo	"<a href='".$item->link."' target='blank'><h3>".$item->title."</h3></a>";
 				echo    "<p class='date'>$item->pubDate</p>";
